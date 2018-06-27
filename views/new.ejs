@@ -1,0 +1,23 @@
+<% include partials/header %>
+
+<div class="container">
+  <form action="/affirmations" method="POST">
+    <div class="form-group">
+      <label for="name">Name of Affirmation</label>
+      <input type="text" class="form-control" id="name" name="affirmation[name]"" placeholder="Affirmation Name">
+    </div>
+    <div class="form-group">
+      <label for="content">Affirmation</label>
+      <textarea class="form-control" id="name" name="affirmation[content]" placeholder="Write Affirmation Here" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="image">Optional Picture</label>
+      <input type="text" class="form-control" id="image" name="affirmation[image]"" placeholder="image URL">
+    </div>
+    <button type="submit" class="btn btn-outline-primary">Add Affirmation</button>
+  </form>
+</div>
+
+
+
+<% include partials/footer %>

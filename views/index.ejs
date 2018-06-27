@@ -1,0 +1,14 @@
+<% include partials/header %>
+
+<% affirm.forEach(function(affirmation){ %>
+
+    <div>
+      <div class="container">
+        <h2><%= affirmation.name%></h2>
+        <p><%= affirmation.content%> </p>
+        <img src="<%=affirmation.image%>">
+      </div>
+    </div>
+<% }); %>
+
+<% include partials/footer %>
