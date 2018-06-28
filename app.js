@@ -2,12 +2,14 @@ var express     = require("express"),
     app         = express(),
     bodyParser  = require("body-parser"),
     mongoose    = require('mongoose');
+    methodOverride = require('method-override');
 
 //APP CONFIG
 mongoose.connect("mongodb://localhost/affirmations_app");
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(methodOverride("_method"));
 
 //MONGOOSE/MODEL CONFIG
   var affirmSchema = new mongoose.Schema({
@@ -65,6 +67,40 @@ app.post("/affirmations", function(req, res){
 //     }
 //   });
 // });
+
+//EDIT ROUTE
+app.get("/affirmations/:id/edit", function(req, res){
+  Affirm.findById(req.params.id, function(err, foundAffirm){
+    if(err){
+      res.redirect("/affirmations");
+    } else {
+      res.render("edit", {affirmation: foundAffirm})
+    }
+  });
+});
+
+// //UPDATE ROUTE
+app.put("/affirmations/:id", function(req, res){
+  Affirm.findByIdAndUpdate(req.params.id, req.body.affirmation, function(err, updatedAffirm){
+    if(err){
+      res.redirect("/affirmations");
+    } else {
+      res.redirect("/affirmations/");
+    }
+  });
+});
+
+
+// //DELETE ROUTE
+// app.delete("/affirmations/:id", function(req, res){
+//   Affirm.findById(req.params.id, function(err, foundAffirm){
+//     if(err){
+//       res.redirect("/affirmations");
+//     } else {
+//       res.render("/affirmations");
+//     }
+//   })
+// })
 
 
 
